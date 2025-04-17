@@ -29,12 +29,12 @@ export default function ColorPage() {
 
   return (
     <div className='flex flex-col flex-1'>
-        <div className="border rounded-lg showdow-sm mb-4">
+        <div className="border rounded-xl border-black showdow-sm mb-4">
             <div
             className="h-64 sm:h-80 rounded-t-lg"
             style={{ backgroundColor: colorData?.hex_code }}
             />
-            <div className="p-4 text-xl font-mono text-gray-800">#{colorData?.hex_code}</div>
+            <div className="p-4 text-xl font-mono text-gray-800">{colorData?.hex_code}</div>
         </div>
     </div>
   )
