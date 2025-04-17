@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "ts-node --project tsconfig.json src/lib/seed-colors.ts"
+    "seed": "ts-node --project tsconfig.json src/lib/seed-colors.ts",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "index": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/lib/index.ts"
