@@ -15,13 +15,12 @@ export default function ColorPage() {
     useEffect(() => {
         const getColor = async () => {
             try {
+              setLoading(true)
               const response = await fetch(`/api/get_color?slug=${params.slug}`)
               if (!response.ok) throw new Error('Failed to fetch color data')
               const data = await response.json()
               setColorData(data.mainColor)
               setRelatedColors(data.relatedColors)
-              console.log(colorData)
-              console.log(relatedColors)
             } catch (error) {
               console.error('Error fetching color:', error)
               setError('Failed to load color data')
@@ -46,14 +45,12 @@ export default function ColorPage() {
                     style={{ backgroundColor: colorData?.hex_code }}
                 />
                 <div className="p-4">
-                    <div className="text-2xl font-bold mb-2">{colorData?.name}</div>
                     <div className="text-xl font-mono text-gray-800">{colorData?.hex_code}</div>
                 </div>
             </div>
 
             {relatedColors.length > 0 && (
                 <div>
-                    <h2 className="text-xl font-bold mb-4">Related Colors</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {relatedColors.map((color: any) => (
                             <ColorCard key={color.id} color={color} />
