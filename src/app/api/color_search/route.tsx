@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     
     if (query) {
       const searchTerms = query.trim().split(/\s+/);
-      colors = await prisma.hex_colors.findMany({
+      colors = await prisma.colors.findMany({
         where: {
             OR: searchTerms.map(term => ({
                 name: {
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
         },
       });
     } else {
-      colors = await prisma.hex_colors.findMany({});
+      colors = await prisma.colors.findMany({});
     }
     
       totalResults = colors.length;
