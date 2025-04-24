@@ -2,9 +2,10 @@ import { getColorBySlug } from '@/app/actions/colorActions';
 import ColorCard from '@/app/components/ColorCard';
 import { notFound } from 'next/navigation';
 
-export default async function ColorPage({ params }: { params: { slug: string } }) {
+export default async function ColorPage({ params }: { params: Promise<{ slug: string }> }) {
   try {
-    const { mainColor, relatedColors } = await getColorBySlug(params.slug);
+    const currentParams = await params;
+    const { mainColor, relatedColors } = await getColorBySlug(currentParams.slug);
     
     return (
       <div className='flex flex-col flex-1 p-4'>
