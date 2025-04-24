@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "./componets/Header";
-import SideBar from "./componets/SideBar";
-import { SearchProvider } from "./componets/SearchContext";
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
+import { SearchProvider } from "./components/SearchContext";
 import { Suspense } from "react";
 
 const geistSans = Geist({
@@ -30,16 +30,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
         <Suspense fallback={<div>Loading...</div>}>
-          <SearchProvider>
             <Header />
+        </Suspense>
             <div className="flex">
-              <SideBar />
+              <Suspense fallback={<div>Loading...</div>}>
+                <SideBar />
+              </Suspense>
             <main className="flex flex-col flex-1 p-6 overflow-auto">
-              {children}
+              <Suspense fallback={<div>Loading...</div>}>
+                {children}
+              </Suspense>
               </main>
             </div>
-          </SearchProvider>
-        </Suspense>
       </body>
     </html>
   );
